@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://justin:vintagecf1@trackmypr-mobile-39aow.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "TigerShark"
+}
