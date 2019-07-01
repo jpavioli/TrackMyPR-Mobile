@@ -34,13 +34,17 @@ module.exports = {
 
   patch: async (req,res) => {
     const newScore = req.body
-    const result = await Score.findByIdAndUpdate(req.params.id,newScore)
-    res.status(200).json({success:true})
+    let score = await Score.findById(req.params.id)
+    if (!score) {return res.status(500).json({message:'Workout does not exist',success:false})}
+    if (score.userId !== req.user.id) {return res.status(401).json({ message: 'Unauthrized User',success: false })}
+    await score.updateOne(newScore)
+    res.status(200).json({score:{...score._doc,...newScore},success:true})
   },
 
   delete: async (req,res) => {
     const score = await Score.findById(req.params.id)
     if(!score) {return res.status(404).json({error: 'Score Does Not Exist',success: false})}
+    let id = score.id
     const user = await User.findById(score.user.id)
     const workout = await Workout.findById(score.workout.id)
     await score.remove()
@@ -48,7 +52,7 @@ module.exports = {
     await user.save()
     workouts.scores.pull(score)
     await workouts.save()
-    res.status(200).json({success:true})
+    res.status(200).json({id,success:true})
   },
 
   getByUserId: async (req,res) => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 import HomePage from "./containers/home/HomePage";
-import LoginPage from './containers/home/LoginPage';
-import { createStackNavigator } from "react-navigation";
+import LoginPage from './containers/login/LoginPage';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 const Routes = createStackNavigator(
   {
@@ -25,4 +25,4 @@ const Routes = createStackNavigator(
   }
 );
 
-export default Routes;
+export default createAppContainer(Routes);
