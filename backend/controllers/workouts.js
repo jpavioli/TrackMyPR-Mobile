@@ -1,36 +1,42 @@
 const Workout = require('../models/Workouts')
+const Score = require('../models/Scores')
+const User = require('../models/Users')
 
 module.exports = {
 
-  get: (req,res) => {
-    Workout.findAll()
-      .then(workouts => res.json(workouts))
+  get: async (req,res) => {
+    let workouts = await Workout.find({})
+    res.status(200).json({workouts,success:true})
   },
 
-  getById: (req,res) => {
-    Workout.findById(req.params.id)
-      .then(workout => res.json(workout))
-      .catch(err => res.status(500).json({ success: false }));
+  getById: async (req,res) => {
+    let workout = await Workout.findById(req.params.id)
+    if (!workout) {return res.status(500).json({message:'Workout does not exist',success:false})}
+    res.status(200).json({workout,success:true})
   },
 
-  post: (req,res) => {
-    Workout.create({...req.body, userId:req.user.id})
-      .then(workout => res.json(workout))
-      .catch(err => res.status(500).json({ success: false }));
+  post: async (req,res) => {
+    if (!req.user.id) {return res.status(404).json({error: 'Workout Must Belong to a User', success:false})}
+    let newWorkout = await Workout.create({...req.body, userId:req.user.id})
+    res.status(200).json({workout:newWorkout,success:true})
   },
 
-  patch: (req,res) => {
-    Workout.findById(req.params.id)
-      .then(workout => req.user.id === workout.userId ? workout.update(req.body) : res.status(401).json({ success: false }))
-      .then(workout => res.json(workout))
-      .catch(err => res.status(500).json({ success: false }));
+  patch: async (req,res) => {
+    let newWorkout = req.body
+    let workout = await Workout.findById(req.params.id)
+    if (!workout) {return res.status(500).json({message:'Workout does not exist',success:false})}
+    if (workout.userId !== req.user.id) {return res.status(401).json({ message: 'Unauthrized User',success: false })}
+    await workout.update(newWorkout)
+    res.status(200).json({success:true})
   },
 
-  delete: (req,res) => {
-    Workout.findById(req.params.id)
-    .then(workout => req.user.id === workout.userId ? workout.destroy() : res.status(401).json({ success: false }))
-      .then(() => res.json({ success: true }))
-      .catch(err => res.status(500).json({ success: false }));
+  delete: async (req,res) => {
+    let workout = await Workout.findById(req.params.id)
+    if (!workout) {return res.status(500).json({message:'Workout does not exist',success:false})}
+    if (workout.userId !== req.user.id) {return res.status(401).json({ message: 'Unauthrized User',success: false })}
+    await Score.deleteMany({workout: workout.id})
+    await workout.remove()
+    res.status(200).json({success:true})
   },
 
 }

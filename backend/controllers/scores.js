@@ -21,14 +21,14 @@ module.exports = {
     const workout = await Workout.findById(req.body.workout)
     const newScore = req.body
     delete newScore.workout
-    const score = new Score(newScore)
-    score.user = user
-    score.workout = workout
-    await score.save()
-    user.scores.push(score)
-    await user.save()
+    let score = new Score(newScore)
+    // user.scores.push(score)
     workout.scores.push(score)
+    // await user.save()
     await workout.save()
+    score.workout = workout
+    score.user = user
+    await score.save()
     res.status(200).json(score)
   },
 
@@ -39,7 +39,6 @@ module.exports = {
   },
 
   delete: async (req,res) => {
-    console.log('here')
     const score = await Score.findById(req.params.id)
     if(!score) {return res.status(404).json({error: 'Score Does Not Exist',success: false})}
     const user = await User.findById(score.user.id)
@@ -50,29 +49,18 @@ module.exports = {
     workouts.scores.pull(score)
     await workouts.save()
     res.status(200).json({success:true})
+  },
 
-  //   Score.findByPk(req.params.id)
-  //     .then(score => {
-  //       if(!score){return res.status(404).json({success: false})}
-  //       if(req.user._id === score.user._id) {
-  //         User.findByPk(score.user._id)
-  //           .then(user => {
-  //             user.scores.pull(score)
-  //             user.save()
-  //           .catch(err => res.status(500).json({success: false}))
-  //           })
-  //         Workout.findByPk(score.workout._id)
-  //           .then(workout => {
-  //             workout.scores.pull(score)
-  //             workout.save()
-  //           })
-  //           .catch(err => res.status(500).json({success: false}))
-  //         score.destroy()
-  //       }
-  //       else {res.status(401).json({ success: false })}
-  //     })
-  //     .then(() => res.json({ success: true }))
-  //     .catch(err => res.status(500).json({ success: false }));
+  getByUserId: async (req,res) => {
+    const scores = await Score.find({user: {_id: req.params.id}})
+    if (scores.length === 0) {return res.status(404).json({error: 'User has no logged Scores',success: false})}
+    res.status(200).json({scores,success:true})
+  },
+
+  getByWorkoutId: async (req,res) => {
+    const scores = await Workout.find({workout: {_id: req.params.id}})
+    if (scores.length === 0) {return res.status(404).json({error: 'Wokout has no logged Scores',success: false})}
+    res.status(200).json({scores,success:true})
   }
 
 }

@@ -17,10 +17,6 @@ var userSchema = new Schema({
     height: Number,
     weight: Number
   },
-  scores: [{
-    type: Schema.Types.ObjectId,
-    ref: 'score'
-  }]
 });
 
 const User = mongoose.model('user', userSchema)
