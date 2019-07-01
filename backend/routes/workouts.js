@@ -13,4 +13,7 @@ router.route('/:id')
   .patch(auth,WorkoutController.patch)
   .delete(auth,WorkoutController.delete)
 
+router.route('/user/:id')
+  .get(WorkoutController.getByUserId)
+
 module.exports = router;

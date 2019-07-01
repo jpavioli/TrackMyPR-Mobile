@@ -11,7 +11,6 @@ app.use(express.json())
 app.use(cors())
 
 const db = config.get('mongoURI')
-console.log(db)
 mongoose.connect(db,{useNewUrlParser:true})
   .then(()=>console.log('MongoDB Connected'))
   .catch(err => console.log(err))
@@ -39,4 +38,4 @@ app.use((err, req,res,next) => {
 
 //Listener Port 6969 - Because Justin is a Child
 const port = app.get('port') || 6969
-app.listen(port,() => {console.log(`I am listening at port ${port}`)})
+app.listen(port,() => {console.log(`Server running at port ${port}`)})
