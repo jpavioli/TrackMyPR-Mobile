@@ -4,14 +4,12 @@ export const fetchScores = (userID) => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          disptch({
+          dispatch({
             type: 'FETCH_SCORES',
             scores: data.scores
           })
         })
       }
-
-  }
 }
 
 export const newScore = (obj,token) => {
@@ -23,7 +21,7 @@ export const newScore = (obj,token) => {
           'content-type':'application.json',
           'auth-token': token
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           workout:obj.workoutId,
           datePerformed: obj.datePerformed,
           location: obj.location,
@@ -32,18 +30,16 @@ export const newScore = (obj,token) => {
           rx: obj.rx,
           modifications: obj.modifications,
           comments: obj.comments,
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'ADD_SCORE',
+          dispatch({
+            type: 'ADD_SCORE',
             workout: data.score
           })
         })
       }
-
-  }
 }
 
 export const editScore = (obj,token) => {
@@ -55,7 +51,7 @@ export const editScore = (obj,token) => {
           'content-type':'application.json',
           'auth-token': token
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           datePerformed: obj.datePerformed,
           location: obj.location,
           results: obj.results,
@@ -63,18 +59,16 @@ export const editScore = (obj,token) => {
           rx: obj.rx,
           modifications: obj.modifications,
           comments: obj.comments,
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'EDIT_SCORE',
+          dispatch({
+            type: 'EDIT_SCORE',
             workoutId: data.score
           })
         })
       }
-
-  }
 }
 
 export const deleteScore = (scoreID,token) => {
@@ -89,14 +83,12 @@ export const deleteScore = (scoreID,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'DELETE_WORKOUT',
+          dispatch({
+            type: 'DELETE_WORKOUT',
             workoutId: score.id
           })
         })
       }
-
-  }
 }
 
 export const clearScores = () => {

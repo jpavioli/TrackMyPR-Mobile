@@ -6,22 +6,20 @@ export const logIn = (obj) => {
         headers: {
           'content-type':'application.json'
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           email: obj.email,
           password: obj.password
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'LOG_IN',
+          dispatch({
+            type: 'LOG_IN',
             token: data.token,
             user: data.user
           })
         })
       }
-
-  }
 }
 
 export const newUser = (obj) => {
@@ -32,7 +30,7 @@ export const newUser = (obj) => {
         headers: {
           'content-type':'application.json'
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           email: obj.email,
           password: obj.password,
           firstName: obj.firstName,
@@ -44,19 +42,18 @@ export const newUser = (obj) => {
           gender: obj.gender,
           height: obj.height,
           weight: obj.weight
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'LOG_IN',
+          dispatch({
+            type: 'LOG_IN',
             token: data.token,
             user: data.user
           })
         })
       }
 
-  }
 }
 
 export const logOut = () => {

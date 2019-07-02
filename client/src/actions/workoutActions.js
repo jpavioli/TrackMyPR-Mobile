@@ -4,14 +4,12 @@ export const fetchAllWorkouts = () => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          disptch({
+          dispatch({
             type: 'FETCH_WORKOUTS',
             workouts: data.workouts
           })
         })
       }
-
-  }
 }
 
 export const fetchMyWorkouts = (userID) => {
@@ -20,14 +18,12 @@ export const fetchMyWorkouts = (userID) => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          disptch({
+          dispatch({
             type: 'FETCH_MY_WORKOUTS',
             workouts: data.workouts
           })
         })
       }
-
-  }
 }
 
 export const newWorkout = (obj,token) => {
@@ -39,24 +35,22 @@ export const newWorkout = (obj,token) => {
           'content-type':'application.json',
           'auth-token': token
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           warmup: obj.warmup,
           name: obj.name,
           description: obj.description,
           format: obj.format,
           coolDown: obj.coolDown
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'ADD_WORKOUT',
+          dispatch({
+            type: 'ADD_WORKOUT',
             workout: data.workout
           })
         })
       }
-
-  }
 }
 
 export const editWorkout = (obj,token) => {
@@ -68,24 +62,22 @@ export const editWorkout = (obj,token) => {
           'content-type':'application.json',
           'auth-token': token
         },
-        body: JSON.stringify{
+        body: JSON.stringify({
           warmup: obj.warmup,
           name: obj.name,
           description: obj.description,
           format: obj.format,
           coolDown: obj.coolDown
-        }
+        })
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'EDIT_WORKOUT',
+          dispatch({
+            type: 'EDIT_WORKOUT',
             workoutId: data.workout
           })
         })
       }
-
-  }
 }
 
 export const deleteWorkout = (workoutID,token) => {
@@ -100,14 +92,12 @@ export const deleteWorkout = (workoutID,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          disptch({
-            action: 'DELETE_WORKOUT',
+          dispatch({
+            type: 'DELETE_WORKOUT',
             workoutId: data.id
           })
         })
       }
-
-  }
 }
 
 export const clearScores = () => {

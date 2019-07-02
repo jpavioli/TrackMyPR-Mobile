@@ -6,7 +6,7 @@ export default class LoginPage extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
+        <Text style={{color:'white'}} >LogIn Screen</Text>
       </View>
     );
   }
