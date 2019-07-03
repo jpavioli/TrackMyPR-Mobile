@@ -1,10 +1,12 @@
+import {Alert} from "react-native";
+
 export const logIn = (obj) => {
   const URL = `http://localhost:6969/auth`
   return dispatch => {
       fetch(URL, {
         method: 'POST',
         headers: {
-          'content-type':'application.json'
+          'content-type':'application/json'
         },
         body: JSON.stringify({
           email: obj.email,
@@ -13,11 +15,16 @@ export const logIn = (obj) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'LOG_IN',
-            token: data.token,
-            user: data.user
-          })
+          if (data.success){
+            dispatch({
+              type: 'LOG_IN',
+              token: data.token,
+              user: data.user
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 }
@@ -46,11 +53,16 @@ export const newUser = (obj) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'LOG_IN',
-            token: data.token,
-            user: data.user
-          })
+          if (data.success){
+            dispatch({
+              type: 'LOG_IN',
+              token: data.token,
+              user: data.user
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 

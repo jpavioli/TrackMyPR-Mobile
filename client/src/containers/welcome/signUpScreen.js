@@ -27,6 +27,25 @@ class SignUp extends React.Component {
     this.props.newUser(this.state)
   }
 
+  styles = StyleSheet.create({
+    title: {
+      fontSize: 25,
+      fontWeight: 'bold',
+    },
+    textField: {
+      height: 20,
+      color: 'white',
+      borderWidth: this.props.environment.width*0.8,
+    },
+    description: {
+      fontSize: 15
+    },
+    att: {
+      fontSize: 10,
+      fontStyle: 'italic'
+    },
+  });
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -48,7 +67,7 @@ class SignUp extends React.Component {
         <Text style={{color:'white'}} >Country</Text>
         <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1, width:this.props.environment.width*0.8,color:'white'}} onChangeText={(contry) => this.setState({country})} value={this.state.country} />
         <Text style={{color:'white'}} >Gender</Text>
-        <Picker style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeValue={(gender) => this.setState({gender})} value={this.state.gender} >
+        <Picker style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onValueChange={(gender) => this.setState({gender})} selectedValue={this.state.gender} >
           <Picker.Item label="Male" value="Male" />
           <Picker.Item label="Female" value="Female" />
         </Picker>
@@ -56,7 +75,7 @@ class SignUp extends React.Component {
         <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(height) => this.setState({height})} value={this.state.height} />
         <Text style={{color:'white'}} >Weight</Text>
         <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(weight) => this.setState({weight})} value={this.state.weight} />
-        <Button title='Sign Up' onPress={() => alert('button pressed')} />
+        <Button title='Sign Up' onPress={() => this.SignUp(this.state)} />
         <Button title='Go Back' onPress={() => this.props.navigation.navigate('Home')} />
       </View>
     );

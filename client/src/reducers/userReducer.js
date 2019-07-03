@@ -1,7 +1,6 @@
 const defaultState = {
   user: null,
-  token: 0,
-  loggedIn: false
+  token: 0
 }
 
 export default function userReducer(state = defaultState , action){
@@ -9,14 +8,12 @@ export default function userReducer(state = defaultState , action){
     case 'LOG_IN':
       return {
         user: action.user,
-        token: action.token,
-        loggedIn: true
+        token: action.token
       }
     case 'LOG_OUT':
       return {
         user: null,
-        token: 0,
-        loggedIn: false
+        token: 0
       }
     default:
       return state

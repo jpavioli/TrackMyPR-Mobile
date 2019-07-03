@@ -9,7 +9,7 @@ module.exports = {
   post: async (req, res) => {
     const { email, password } = req.body;
     // Simple validation
-    if(!email || !password) {return res.status(400).json({message:'Please a Username and Password',success:false});}
+    if(!email || !password) {return res.status(400).json({message:'Please enter an Email and Password',success:false});}
     // Check for existing user
     const user = await User.findOne({ email })
     if(!user) return res.status(400).json({message:'User Does not exist',success:false})

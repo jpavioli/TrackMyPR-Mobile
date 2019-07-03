@@ -4,14 +4,6 @@ import { Icon } from "react-native-elements"
 
 export default class HeaderContainer extends React.Component {
 
-  currentDate = () => {
-    let today = new Date;
-    let dd = today.getDate()
-    let mm = today.getMonth()+1
-    if (dd<10) {dd='0'+dd}
-    return (mm+'/'+dd)
-  }
-
   render() {
     return (
       <View style={styles.main}>

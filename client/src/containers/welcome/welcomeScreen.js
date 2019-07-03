@@ -15,6 +15,7 @@ class LoginPage extends React.Component {
   }
 
   signIn = () => {
+    console.log(this.state)
     this.props.logIn(this.state)
   }
 
@@ -23,7 +24,7 @@ class LoginPage extends React.Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: 'black'}}>
         <Text style={{color:'white'}} >TrackMyPR</Text>
         <Text style={{color:'white'}} >Email</Text>
-        <TextInput style={{height: 20, width:this.props.environment.width*0.8, borderColor:'gray', color:'white', borderWidth: 1}} onChangeText={(email) => this.setState({email})} value={this.state.email} />
+        <TextInput style={{height: 20, width:this.props.environment.width*0.8, borderColor:'gray', color:'white', borderWidth: 1}} autoCapitalize='none' onChangeText={(email) => this.setState({email})} value={this.state.email} />
         <Text style={{color:'white'}} >Password</Text>
         <TextInput style={{height: 20, width:this.props.environment.width*0.8, borderColor:'gray', color:'white', borderWidth: 1}} secureTextEntry={true} onChangeText={(password) => this.setState({password})} value={this.state.password} />
         <Button title='Log In' onPress={this.signIn} />

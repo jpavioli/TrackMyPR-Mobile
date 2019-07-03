@@ -1,13 +1,20 @@
+import {Alert} from "react-native";
+
 export const fetchAllWorkouts = () => {
   const URL = `http://localhost:6969/workouts`
   return dispatch => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'FETCH_WORKOUTS',
-            workouts: data.workouts
-          })
+          if (data.success){
+            dispatch({
+              type: 'FETCH_WORKOUTS',
+              workouts: data.workouts
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 }
@@ -32,7 +39,7 @@ export const newWorkout = (obj,token) => {
       fetch(URL, {
         method: 'POST',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         },
         body: JSON.stringify({
@@ -45,10 +52,15 @@ export const newWorkout = (obj,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'ADD_WORKOUT',
-            workout: data.workout
-          })
+          if (data.success){
+            dispatch({
+              type: 'ADD_WORKOUT',
+              workout: data.workout
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 }
@@ -59,7 +71,7 @@ export const editWorkout = (obj,token) => {
       fetch(URL, {
         method: 'PATCH',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         },
         body: JSON.stringify({
@@ -72,10 +84,15 @@ export const editWorkout = (obj,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'EDIT_WORKOUT',
-            workoutId: data.workout
-          })
+          if (data.success){
+            dispatch({
+              type: 'EDIT_WORKOUT',
+              workoutId: data.workout
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 }
@@ -86,16 +103,21 @@ export const deleteWorkout = (workoutID,token) => {
       fetch(URL, {
         method: 'DELETE',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         }
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'DELETE_WORKOUT',
-            workoutId: data.id
-          })
+          if (data.success) {
+            dispatch({
+              type: 'DELETE_WORKOUT',
+              workoutId: data.id
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
       }
 }

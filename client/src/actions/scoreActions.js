@@ -4,6 +4,7 @@ export const fetchScores = (userID) => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
+          console.log(data)
           dispatch({
             type: 'FETCH_SCORES',
             scores: data.scores

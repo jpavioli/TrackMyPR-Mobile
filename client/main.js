@@ -7,21 +7,32 @@ import { adjustEnvironment } from './src/actions/environmentActions'
 import WelcomeScreen from './src/containers/welcome/welcomeScreen'
 import SignUp from './src/containers/welcome/signUpScreen'
 import Routes from './src/routes'
+import Header from './src/containers/header/headerContainer'
+import Footer from './src/containers/footer/footerContainer'
 
 class Main extends React.Component {
-  constructor(){
-    super()
-  }
 
   componentDidMount() {
     this.props.adjustEnvironment(Dimensions.get('window'))
   }
 
   render() {
-    console.log(this.props.user)
     return (
       <View style={{backgroundColor:'black',flexDirection:'column',justifyContent:'center',height:this.props.environment.height,width:this.props.environment.width}}>
-        {this.props.user.loggedIn ? <Routes /> : <Welcome /> }
+        {this.props.user.token !== 0 ?
+          <View style={{flex:1,flexDirection:'column'}}>
+            <View style={{height: this.props.environment.height*0.15, backgroundColor:'#2eb7d1', justifyContent:'center', padding:this.props.environment.width*0.05}} >
+              <Header />
+            </View>
+            <View style={{height: this.props.environment.height*0.75}} >
+              <Routes />
+            </View>
+            <View style={{height: this.props.environment.height*0.1, backgroundColor:'#2eb7d1', justifyContent:'center'}} >
+              <Footer />
+            </View>
+          </View>
+          :
+          <Welcome /> }
       </View>
     );
   }
