@@ -1,21 +1,22 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+import { Icon } from "react-native-elements"
 
 export default class HeaderContainer extends React.Component {
 
-  currentDate = () => {
-    let today = new Date;
-    let dd = today.getDate()
-    let mm = today.getMonth()+1
-    if (dd<10) {dd='0'+dd}
-    return (mm+'/'+dd)
-  }
-
   render() {
     return (
-      <View>
-        <Text style={{justifyContent: "flex-start", color:'white', fontSize: 30, textShadowRadius:3}}>{this.currentDate()}</Text>
+      <View style={styles.main}>
+        <Icon name='menu' iconStyle={styles.icon} iconSize='30'/>
+        <Icon name='account-circle' iconStyle={styles.icon} iconSize='40'/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  main: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
+})

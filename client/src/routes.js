@@ -1,28 +1,39 @@
 import React from "react";
 import { View } from "react-native";
 import HomePage from "./containers/home/HomePage";
-import LoginPage from './containers/login/LoginPage';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import Workouts from "./containers/workouts/workoutContainer"
+import MyWorkouts from "./containers/workouts/myWorkoutContainer"
+import NewWorkout from "./components/workout/newWorkoutForm"
+import Scores from "./containers/scores/scoresContainer"
+import Profile from './containers/profile/Profile'
+import { createDrawerNavigator, createAppContainer } from "react-navigation";
 
-const Routes = createStackNavigator(
-  {
-    Login: {
-      screen: LoginPage
-    },
-    Home: {
-      screen: HomePage
-    },
+const routeConfigs = {
+  Home: {
+    screen: HomePage
   },
-  {
-    initialRouteName: "Login",
-    navigationOptions: {
-      header: props => <Header {...props} />,
-      headerTitleStyle: {
-        backgroundColor: "transparent"
-      },
-      headerTintColor: "#fff"
-    }
+  'All Workouts': {
+    screen: Workouts
+  },
+  'My Workouts': {
+    screen: MyWorkouts
+  },
+  'New Workout': {
+    screen: NewWorkout
+  },
+  Scores: {
+    screen: Scores
+  },
+  Profile: {
+    screen: Profile
   }
-);
+}
+
+const drawerNavigatorConfigs ={
+    initialRouteName: "Home",
+    unmountInactiveRoutes: true
+  }
+
+const Routes = createDrawerNavigator(routeConfigs,drawerNavigatorConfigs)
 
 export default createAppContainer(Routes);

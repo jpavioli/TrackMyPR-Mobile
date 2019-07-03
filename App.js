@@ -1,55 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import rootReducer from './client/src/reducers/root'
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux';
+import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
 
-import HeaderContainer from './client/src/containers/header/headerContainer'
-import FooterContainer from './client/src/containers/footer/footerContainer'
-import Routes from './client/src/routes'
+import rootReducer from './client/src/reducers/root';
+import Main from './client/main';
 
-let store = createStore(rootReducer,applyMiddleware(thunk))
+const store = createStore(rootReducer,applyMiddleware(thunk))
 
-export default function App() {
-  return (
-    <View style={styles.main}>
-      <View style={styles.header}>
-        <HeaderContainer />
-      </View>
-      <View style={styles.container}>
-        <Text style={{color: 'white'}}>TEST</Text>
-        <Routes />
-      </View>
-      <View style={styles.footer}>
-        <FooterContainer />
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  main: {
-    flex:1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  header: {
-    paddingTop:40,
-    paddingLeft:20,
-    height: 120,
-    backgroundColor: 'steelblue'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: 'grey',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-  footer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'steelblue',
-    height: 80,
+export default class App extends React.Component{
+  render(){
+    return (
+      <Provider store={store}>
+        <Main />
+      </Provider>
+    )
   }
-
-});
+};

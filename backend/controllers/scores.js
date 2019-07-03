@@ -29,7 +29,7 @@ module.exports = {
     score.workout = workout
     score.user = user
     await score.save()
-    res.status(200).json(score)
+    res.status(200).json({score,success:true})
   },
 
   patch: async (req,res) => {

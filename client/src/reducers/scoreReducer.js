@@ -7,7 +7,7 @@ export default function scoreReducer(state = defaultState , action){
     case 'FETCH_SCORES':
       return {
         ...state,
-        scores: action.loading
+        scores: action.scores
       }
     case 'ADD_SCORE':
       return {
