@@ -66,7 +66,7 @@ export const newWorkout = (obj,token) => {
 }
 
 export const editWorkout = (obj,token) => {
-  const URL = `http://localhost:6969/workouts/${obj.id}`
+  const URL = `http://localhost:6969/workouts/${obj._id}`
   return dispatch => {
       fetch(URL, {
         method: 'PATCH',
@@ -87,7 +87,7 @@ export const editWorkout = (obj,token) => {
           if (data.success){
             dispatch({
               type: 'EDIT_WORKOUT',
-              workoutId: data.workout
+              workout: data.workout
             })
           }
           else {

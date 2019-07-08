@@ -1,12 +1,25 @@
-export const fetchScores = (userID) => {
+export const fetchAllScores = () => {
+  const URL = `http://localhost:6969/scores`
+  return dispatch => {
+      fetch(URL)
+        .then(res=>res.json())
+        .then(data=>{
+          dispatch({
+            type: 'FETCH_ALL_SCORES',
+            scores: data.scores
+          })
+        })
+      }
+}
+
+export const fetchMyScores = (userID) => {
   const URL = `http://localhost:6969/scores/user/${userID}`
   return dispatch => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          console.log(data)
           dispatch({
-            type: 'FETCH_SCORES',
+            type: 'FETCH_MY_SCORES',
             scores: data.scores
           })
         })

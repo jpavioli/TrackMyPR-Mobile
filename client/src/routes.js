@@ -21,9 +21,6 @@ const routeConfigs = {
   'New Workout': {
     screen: NewWorkout
   },
-  Scores: {
-    screen: Scores
-  },
   Profile: {
     screen: Profile
   }

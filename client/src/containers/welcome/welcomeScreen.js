@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button, TextInput } from "react-native";
 import {connect} from "react-redux"
 import {logIn} from '../../actions/userActions'
-import SignUp from './signUpScreen'
+import SignUp from '../../components/user/newUserForm'
 
 class LoginPage extends React.Component {
 
@@ -15,7 +15,6 @@ class LoginPage extends React.Component {
   }
 
   signIn = () => {
-    console.log(this.state)
     this.props.logIn(this.state)
   }
 
