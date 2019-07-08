@@ -22,16 +22,17 @@ export default function workoutsReducer(state = defaultState , action){
         myWorkouts: [...state.myWorkouts, action.workout]
       }
     case 'EDIT_WORKOUT':
-      let newWorkouts = state.workouts.filter(w => w.id !== action.workout.id)
-      let newMyWorkouts = state.myWorkouts.filter(w => w.id !== action.workout.id)
+      console.log(action)
+      let newWorkouts = state.workouts.filter(w => w._id !== action.workout._id)
+      let newMyWorkouts = state.myWorkouts.filter(w => w._id !== action.workout._id)
       return {
         ...state,
-        workouts: [...newWorkouts, action.workout],
-        myWorkouts: [...newMyWorkouts, action.workout]
+        workouts: [action.workout,...newWorkouts],
+        myWorkouts: [action.workout,...newMyWorkouts]
       }
     case 'DELETE_WORKOUT':
-      let newWorkoutArr = state.workouts.filter(w => w.id !== action.workoutId)
-      let newMyWorkoutArr = state.myWorkouts.filter(w => w.id !== action.workoutId)
+      let newWorkoutArr = state.workouts.filter(w => w._id !== action.workoutId)
+      let newMyWorkoutArr = state.myWorkouts.filter(w => w._id !== action.workoutId)
       return {
         ...state,
         workouts: newWorkoutArr,

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, TextInput, Picker} from "react-native";
+import { View, Text, Button, TextInput, Picker, Dimensions} from "react-native";
 import {connect} from "react-redux"
 
 import {newUser} from '../../actions/userActions'
@@ -27,25 +27,6 @@ class SignUp extends React.Component {
     this.props.newUser(this.state)
   }
 
-  styles = StyleSheet.create({
-    title: {
-      fontSize: 25,
-      fontWeight: 'bold',
-    },
-    textField: {
-      height: 20,
-      color: 'white',
-      borderWidth: this.props.environment.width*0.8,
-    },
-    description: {
-      fontSize: 15
-    },
-    att: {
-      fontSize: 10,
-      fontStyle: 'italic'
-    },
-  });
-
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -67,10 +48,10 @@ class SignUp extends React.Component {
         <Text style={{color:'white'}} >Country</Text>
         <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1, width:this.props.environment.width*0.8,color:'white'}} onChangeText={(contry) => this.setState({country})} value={this.state.country} />
         <Text style={{color:'white'}} >Gender</Text>
-        <Picker style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onValueChange={(gender) => this.setState({gender})} selectedValue={this.state.gender} >
-          <Picker.Item label="Male" value="Male" />
-          <Picker.Item label="Female" value="Female" />
-        </Picker>
+        <View style={{flexDirection:'row'}}>
+          <Button flex={1} title='Male' onPress={()=>this.setState({gender:'Male'})} color={this.state.gender === 'Male' ? '#841584' : 'white'} />
+          <Button flex={2} title='Female' onPress={()=>this.setState({gender:'Female'})} color={this.state.gender === 'Female' ? '#841584' : 'white'} />
+        </View>
         <Text style={{color:'white'}} >Height</Text>
         <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(height) => this.setState({height})} value={this.state.height} />
         <Text style={{color:'white'}} >Weight</Text>

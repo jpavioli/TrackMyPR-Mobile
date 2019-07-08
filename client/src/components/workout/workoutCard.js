@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import {View, Text, StyleSheet} from "react-native";
+import {Card, ListItem, Button, Icon } from 'react-native-elements'
 
 export default function WorkoutCard(props) {
   return (
@@ -8,6 +8,20 @@ export default function WorkoutCard(props) {
       <Text style={styles.header} >{props.workout.name}</Text>
       <Text style={styles.description} >{props.workout.description}</Text>
       <Text style={styles.att} >Times Attempted: {props.workout.scores.length}</Text>
+      {props.editWorkout ?
+        <View style={{flexDirection:'row', justifyContent:'space-evenly'}}>
+          <Button
+            style={{width:100}}
+            onPress={() => props.editWorkout(props.workout)}
+            title='Edit'
+          />
+          <Button
+            style={{width:100}}
+            onPress={() => props.deleteWorkout(props.workout)}
+            title='Delete'
+          />
+        </View>
+        : null}
     </Card>
   )
 }

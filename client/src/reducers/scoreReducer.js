@@ -1,13 +1,19 @@
 const defaultState = {
-  scores: []
+  scores: [],
+  myScores: []
 }
 
 export default function scoreReducer(state = defaultState , action){
   switch(action.type){
-    case 'FETCH_SCORES':
+    case 'FETCH_ALL_SCORES':
       return {
         ...state,
         scores: action.scores
+      }
+    case 'FETCH_MY_SCORES':
+      return {
+        ...state,
+        myScores: action.scores
       }
     case 'ADD_SCORE':
       return {
