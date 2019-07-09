@@ -15,10 +15,6 @@ class myWorkoutContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchMyWorkouts(this.props.user.user._id)
-  }
-
   openModal = (obj) => {
     this.setState({
       editThis: obj,

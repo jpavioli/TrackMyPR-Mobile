@@ -5,7 +5,7 @@ import Workouts from "./containers/workouts/workoutContainer"
 import MyWorkouts from "./containers/workouts/myWorkoutContainer"
 import NewWorkout from "./components/workout/newWorkoutForm"
 import Scores from "./containers/scores/scoresContainer"
-import Profile from './containers/profile/Profile'
+import Profile from './components/user/userShowPage'
 import { createDrawerNavigator, createAppContainer } from "react-navigation";
 
 const routeConfigs = {

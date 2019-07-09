@@ -1,14 +1,22 @@
+import {Alert} from "react-native";
+
 export const fetchAllScores = () => {
   const URL = `http://localhost:6969/scores`
   return dispatch => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'FETCH_ALL_SCORES',
-            scores: data.scores
-          })
+          if (data.success) {
+            dispatch({
+              type: 'FETCH_ALL_SCORES',
+              scores: data.scores
+            })
+          }
+          else{
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN FETCH ALL SCORES'))
       }
 }
 
@@ -18,11 +26,17 @@ export const fetchMyScores = (userID) => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'FETCH_MY_SCORES',
-            scores: data.scores
-          })
+          if (data.success){
+            dispatch({
+              type: 'FETCH_MY_SCORES',
+              scores: data.scores
+            })
+          }
+          else{
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN FETCH MY SCORES'))
       }
 }
 
@@ -48,11 +62,17 @@ export const newScore = (obj,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'ADD_SCORE',
-            workout: data.score
-          })
+          if (data.success){
+            dispatch({
+              type: 'ADD_SCORE',
+              score: data.score
+            })
+          }
+          else{
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN NEW SCORE'))
       }
 }
 
@@ -77,11 +97,17 @@ export const editScore = (obj,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'EDIT_SCORE',
-            workoutId: data.score
-          })
+          if (data.success){
+            dispatch({
+              type: 'EDIT_SCORE',
+              score: data.score
+            })
+          }
+          else{
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN EDIT SCORE'))
       }
 }
 
@@ -97,11 +123,17 @@ export const deleteScore = (scoreID,token) => {
       })
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'DELETE_WORKOUT',
-            workoutId: score.id
-          })
+          if (data.success){
+            dispatch({
+              type: 'DELETE_WORKOUT',
+              workoutId: score.id
+            })
+          }
+          else{
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN DELETE SCORE'))
       }
 }
 

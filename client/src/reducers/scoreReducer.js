@@ -18,11 +18,11 @@ export default function scoreReducer(state = defaultState , action){
     case 'ADD_SCORE':
       return {
         ...state,
-        workouts: [...state.myWorkouts, action.workout],
-        myWorkouts: [...state.myWorkouts, action.workout]
+        workouts: [...state.myWorkouts, action.score],
+        myWorkouts: [...state.myWorkouts, action.score]
       }
     case 'EDIT_SCORE':
-      let newScores = state.scores.filter(s => s.id !== action.score.id)
+      let newScores = state.scores.filter(s => s.id !== action.score._id)
       return {
         ...state,
         workouts: [...newScores, action.score],
