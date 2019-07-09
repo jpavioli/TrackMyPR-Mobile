@@ -3,8 +3,6 @@ import { StyleSheet, View, Dimensions, Text} from 'react-native';
 import { connect } from 'react-redux';
 import {createSwitchNavigator,createAppContainer} from 'react-navigation'
 import { adjustEnvironment } from './src/actions/environmentActions'
-import { fetchAllWorkouts } from './src/actions/workoutActions'
-import { fetchAllScores } from './src/actions/scoreActions'
 
 import WelcomeScreen from './src/containers/welcome/welcomeScreen'
 import SignUp from './src/components/user/newUserForm'
@@ -16,8 +14,6 @@ class Main extends React.Component {
 
   componentDidMount() {
     this.props.adjustEnvironment(Dimensions.get('window'))
-    this.props.fetchAllWorkouts()
-    this.props.fetchAllScores()
   }
 
   render() {
@@ -64,4 +60,4 @@ const mstp = (state) => {
   }
 }
 
-export default connect(mstp, {adjustEnvironment, fetchAllWorkouts, fetchAllScores})(Main)
+export default connect(mstp, {adjustEnvironment})(Main)

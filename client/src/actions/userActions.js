@@ -26,6 +26,7 @@ export const logIn = (obj) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN LOGIN'))
       }
 }
 
@@ -64,6 +65,7 @@ export const newUser = (obj) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN NEW USER'))
       }
 
 }

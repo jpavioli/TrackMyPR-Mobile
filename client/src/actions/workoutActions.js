@@ -16,6 +16,7 @@ export const fetchAllWorkouts = () => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN FETCH ALL WORKOUTS'))
       }
 }
 
@@ -25,11 +26,17 @@ export const fetchMyWorkouts = (userID) => {
       fetch(URL)
         .then(res=>res.json())
         .then(data=>{
-          dispatch({
-            type: 'FETCH_MY_WORKOUTS',
-            workouts: data.workouts
-          })
+          if (data.success){
+            dispatch({
+              type: 'FETCH_MY_WORKOUTS',
+              workouts: data.workouts
+            })
+          }
+          else {
+            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+          }
         })
+        .catch(console.log('Something went wrong - IN FETCH MY WORKOUTS'))
       }
 }
 
@@ -62,6 +69,7 @@ export const newWorkout = (obj,token) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN NEW WORKOUT'))
       }
 }
 
@@ -94,6 +102,7 @@ export const editWorkout = (obj,token) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN EDIT WORKOUT'))
       }
 }
 
@@ -119,6 +128,7 @@ export const deleteWorkout = (workoutID,token) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
+        .catch(console.log('Something went wrong - IN DELETE WORKOUT'))
       }
 }
 

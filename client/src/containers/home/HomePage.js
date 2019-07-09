@@ -3,6 +3,9 @@ import { View, Text, ScrollView, TouchableHighlight, Modal } from "react-native"
 import { connect } from "react-redux"
 
 import {fetchMyScores} from '../../actions/scoreActions'
+import {fetchMyWorkouts} from '../../actions/workoutActions'
+import {fetchAllWorkouts } from '../../actions/workoutActions'
+import {fetchAllScores } from '../../actions/scoreActions'
 import ScoreCard from '../../components/score/scoreCard'
 import ScoreShow from '../../components/score/scoreShow'
 
@@ -18,7 +21,10 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
+    this.props.fetchAllWorkouts()
+    this.props.fetchAllScores()
     this.props.fetchMyScores(this.props.user.user._id)
+    this.props.fetchMyWorkouts(this.props.user.user._id)
   }
 
   showScore = (score,workout) => {
@@ -68,4 +74,4 @@ const mstp = (state) => {
   }
 }
 
-export default connect(mstp,{fetchMyScores})(HomePage)
+export default connect(mstp,{fetchAllScores, fetchMyScores, fetchAllWorkouts, fetchMyWorkouts})(HomePage)
