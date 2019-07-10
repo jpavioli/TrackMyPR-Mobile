@@ -7,8 +7,7 @@ import { adjustEnvironment } from './src/actions/environmentActions'
 import WelcomeScreen from './src/containers/welcome/welcomeScreen'
 import SignUp from './src/components/user/newUserForm'
 import Routes from './src/routes'
-import Header from './src/containers/header/headerContainer'
-import Footer from './src/containers/footer/footerContainer'
+import {Colors, Spacing, Typography, Buttons} from './src/styles/index'
 
 class Main extends React.Component {
 
@@ -18,18 +17,10 @@ class Main extends React.Component {
 
   render() {
     return (
-      <View style={{backgroundColor:'black',flexDirection:'column',justifyContent:'center',height:this.props.environment.height,width:this.props.environment.width}}>
+      <View style={styles.main}>
         {this.props.user.token !== 0 ?
           <View style={{flex:1,flexDirection:'column'}}>
-            <View style={{height: this.props.environment.height*0.15, backgroundColor:'#2eb7d1', justifyContent:'center', padding:this.props.environment.width*0.05}} >
-              <Header />
-            </View>
-            <View style={{height: this.props.environment.height*0.75}} >
-              <Routes />
-            </View>
-            <View style={{height: this.props.environment.height*0.1, backgroundColor:'#2eb7d1', justifyContent:'center'}} >
-              <Footer />
-            </View>
+            <Routes />
           </View>
           :
           <Welcome /> }
@@ -37,6 +28,30 @@ class Main extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  main: {
+    ...Colors.background,
+    ...Spacing.main
+  },
+  header: {
+    ...Colors.text,
+    ...Spacing.mainHeader,
+    ...Typography.mainHeader
+  },
+  inputText: {
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
+  },
+  textInput: {
+    ...Colors.text,
+    ...Spacing.textInput
+  },
+  button: {
+    ...Buttons.button
+  }
+})
 
 const routeConfigs = {
   Home: {

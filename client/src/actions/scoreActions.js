@@ -16,7 +16,6 @@ export const fetchAllScores = () => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
-        .catch(console.log('Something went wrong - IN FETCH ALL SCORES'))
       }
 }
 
@@ -33,10 +32,9 @@ export const fetchMyScores = (userID) => {
             })
           }
           else{
-            Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
+            Alert.alert('Welcome to Track My PR!', "Swipe Right to get Started!", [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
-        .catch(console.log('Something went wrong - IN FETCH MY SCORES'))
       }
 }
 
@@ -46,11 +44,11 @@ export const newScore = (obj,token) => {
       fetch(URL, {
         method: 'POST',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         },
         body: JSON.stringify({
-          workout:obj.workoutId,
+          workout:obj.workout,
           datePerformed: obj.datePerformed,
           location: obj.location,
           results: obj.results,
@@ -72,7 +70,6 @@ export const newScore = (obj,token) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
-        .catch(console.log('Something went wrong - IN NEW SCORE'))
       }
 }
 
@@ -82,7 +79,7 @@ export const editScore = (obj,token) => {
       fetch(URL, {
         method: 'PATCH',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         },
         body: JSON.stringify({
@@ -107,17 +104,16 @@ export const editScore = (obj,token) => {
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
-        .catch(console.log('Something went wrong - IN EDIT SCORE'))
       }
 }
 
 export const deleteScore = (scoreID,token) => {
-  const URL = `http://localhost:6969/workouts/${scoreID}`
+  const URL = `http://localhost:6969/scores/${scoreID}`
   return dispatch => {
       fetch(URL, {
         method: 'DELETE',
         headers: {
-          'content-type':'application.json',
+          'content-type':'application/json',
           'auth-token': token
         }
       })
@@ -126,14 +122,13 @@ export const deleteScore = (scoreID,token) => {
           if (data.success){
             dispatch({
               type: 'DELETE_WORKOUT',
-              workoutId: score.id
+              scoreId: data.id
             })
           }
           else{
             Alert.alert('Error', data.message, [{text: 'OK', onPress: () => console.log('OK Pressed')}])
           }
         })
-        .catch(console.log('Something went wrong - IN DELETE SCORE'))
       }
 }
 

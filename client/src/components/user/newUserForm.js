@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Button, TextInput, Picker, Dimensions} from "react-native";
+import { View, Text, Button, TextInput, Picker, Dimensions, StyleSheet} from "react-native";
 import {connect} from "react-redux"
+import { Colors, Spacing, Typography, Buttons} from '../../styles/index'
 
 import {newUser} from '../../actions/userActions'
 
@@ -29,39 +30,144 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{color:'white'}} >SIGNUP Screen</Text>
-        <Text style={{color:'white'}} >Email</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(email) => this.setState({email})} value={this.state.email} />
-        <Text style={{color:'white'}} >Password</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(password) => this.setState({password})} value={this.state.password} />
-        <Text style={{color:'white'}} >First Name</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(firstName) => this.setState({firstName})} value={this.state.firstName} />
-        <Text style={{color:'white'}} >Last Name</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(lastName) => this.setState({lastName})} value={this.state.lastName} />
-        <Text style={{color:'white'}} >Birthday</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(birthday) => this.setState({birthday})} value={this.state.birthday} />
-        <Text style={{color:'white'}} >City</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(city) => this.setState({city})} value={this.state.city} />
-        <Text style={{color:'white'}} >State</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(state) => this.setState({state})} value={this.state.state} />
-        <Text style={{color:'white'}} >Country</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1, width:this.props.environment.width*0.8,color:'white'}} onChangeText={(contry) => this.setState({country})} value={this.state.country} />
-        <Text style={{color:'white'}} >Gender</Text>
-        <View style={{flexDirection:'row'}}>
-          <Button flex={1} title='Male' onPress={()=>this.setState({gender:'Male'})} color={this.state.gender === 'Male' ? '#841584' : 'white'} />
-          <Button flex={2} title='Female' onPress={()=>this.setState({gender:'Female'})} color={this.state.gender === 'Female' ? '#841584' : 'white'} />
+      <View style={styles.main}>
+        <Text style={styles.header} >Create an Account!</Text>
+        <Text style={styles.inputText} >Email</Text>
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize='none'
+          textAlign='center'
+          placeholder = 'Enter Email...'
+          onChangeText={(email) => this.setState({email})}
+          value={this.state.email}
+        />
+      <Text style={styles.inputText} >Password</Text>
+        <TextInput
+          style={styles.textInput}
+          textAlign='center'
+          placeholder = 'Enter Password...'
+          secureTextEntry={true}
+          onChangeText={(password) => this.setState({password})}
+          value={this.state.password}
+        />
+      <Text style={styles.inputText} >Name</Text>
+        <View style={styles.inline}>
+          <TextInput
+            style={{...styles.textInput,width:styles.textInput.width/2}}
+            textAlign='center'
+            placeholder = 'First Name'
+            onChangeText={(firstName) => this.setState({firstName})}
+            value={this.state.firstName}
+          />
+          <TextInput
+            style={{...styles.textInput,width:styles.textInput.width/2}}
+            textAlign='center'
+            placeholder = 'Last Name'
+            onChangeText={(lastName) => this.setState({lastName})}
+            value={this.state.lastName}
+          />
         </View>
-        <Text style={{color:'white'}} >Height</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(height) => this.setState({height})} value={this.state.height} />
-        <Text style={{color:'white'}} >Weight</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'white'}} onChangeText={(weight) => this.setState({weight})} value={this.state.weight} />
-        <Button title='Sign Up' onPress={() => this.SignUp(this.state)} />
-        <Button title='Go Back' onPress={() => this.props.navigation.navigate('Home')} />
+        <Text style={styles.inputText} >Birthday</Text>
+        <TextInput
+          style={styles.textInput}
+          textAlign = 'center'
+          placeholder = 'Birthday'
+          onChangeText={(birthday) => this.setState({birthday})}
+          value={this.state.birthday}
+        />
+        <Text style={styles.inputText} >Hometown</Text>
+          <View style={styles.inline}>
+            <TextInput
+              style={{...styles.textInput,width:styles.textInput.width/3}}
+              textAlign = 'center'
+              placeholder = 'City'
+              onChangeText={(city) => this.setState({city})}
+              value={this.state.city}
+            />
+          <TextInput
+            style={{...styles.textInput,width:styles.textInput.width/6}}
+            textAlign = 'center'
+            placeholder = 'ST'
+            onChangeText={(state) => this.setState({state})}
+            value={this.state.state}
+          />
+          <TextInput
+            style={{...styles.textInput,width:styles.textInput.width/6}}
+            textAlign = 'center'
+            placeholder = 'USA'
+            onChangeText={(country) => this.setState({country})}
+            value={this.state.country}
+          />
+          </View>
+        <Text style={styles.inputText} >Gender</Text>
+        <View style={styles.inline}>
+          <Button
+            flex={1}
+            title='Male'
+            onPress={()=>this.setState({gender:'Male'})}
+            color={this.state.gender === 'Male' ? '#841584' : 'white'}
+          />
+          <Button
+            flex={2}
+            title='Female'
+            onPress={()=>this.setState({gender:'Female'})}
+            color={this.state.gender === 'Female' ? '#841584' : 'white'}
+          />
+        </View>
+        <Text style={styles.inputText} >Height</Text>
+        <TextInput
+          style={styles.textInput}
+          textAlign = 'center'
+          placeholder = 'Enter Height'
+          onChangeText={(height) => this.setState({height})}
+          value={this.state.height}
+        />
+      <Text style={styles.inputText} >Weight</Text>
+        <TextInput
+          style={styles.textInput}
+          textAlign = 'center'
+          placeholder = 'Enter Weight'
+          onChangeText={(weight) => this.setState({weight})}
+          value={this.state.weight} />
+        <Button
+          title='Sign Up'
+          onPress={() => this.SignUp(this.state)}
+        />
+        <Button
+          title='Go Back'
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  main: {
+    ...Colors.background,
+    ...Spacing.centeredMain
+  },
+  header: {
+    ...Colors.text,
+    ...Spacing.mainHeader,
+    ...Typography.mainHeader
+  },
+  inputText: {
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
+  },
+  textInput: {
+    ...Colors.text,
+    ...Spacing.textInput
+  },
+  button: {
+    ...Buttons.button
+  },
+  inline: {
+    ...Spacing.sideBySide
+  }
+})
 
 const mstp = (state) => {
   return {

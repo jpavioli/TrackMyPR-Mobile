@@ -1,15 +1,17 @@
 import React from "react";
 import { View, ScrollView, Text, StyleSheet, FlatList } from "react-native";
 import {connect} from "react-redux"
+import { Colors, Spacing, Typography, Buttons, Cards} from '../../styles/index'
 
 import WorkoutCard from '../workout/workoutCard'
 
 function Profile(props){
 
     return (
-      <View style={styles.page}>
+      <View style={styles.main}>
+        <View style={{height:50, allignItems:'stretch',...Colors.backgroundColor}} />
         <Text style={styles.header} >{`${props.user.firstName} ${props.user.lastName}`}</Text>
-        <Text style={styles.att} >{`${props.user.city}, ${props.user.state}`}</Text>
+        <Text style={styles.text} >{`${props.user.city}, ${props.user.state}`}</Text>
         <Text style={styles.text} >Workouts Logged: {props.scores.length}</Text>
         <Text style={styles.text} >Workouts Created: {props.workouts.length}</Text>
         {props.workouts.length > 0 ?
@@ -27,29 +29,33 @@ function Profile(props){
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    padding: '5%',
-    flexDirection: 'column',
-    alignItems: "stretch",
-    justifyContent: "center",
-    color:'white',
+  main: {
+    ...Colors.background,
+    ...Spacing.main,
+    justifyContent:'flex-start'
   },
   header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color:'white'
+    ...Colors.text,
+    ...Spacing.mainHeader,
+    ...Typography.mainHeader
   },
   text: {
-    fontSize: 15,
-    color:'white'
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
   },
-  att: {
-    fontSize: 15,
-    fontStyle: 'italic',
-    color:'white'
+  multiline: {
+    ...Colors.text,
+    ...Spacing.textInput,
+    height: Spacing.height*0.15
   },
-});
+  button: {
+    ...Buttons.button
+  },
+  inline: {
+    ...Spacing.sideBySide
+  }
+})
 
 const mstp = (state) => {
   return {

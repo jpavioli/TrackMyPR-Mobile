@@ -1,6 +1,7 @@
 import React from "react";
-import {View, Text, Button, TextInput, Picker} from "react-native";
+import {View, Text, Button, TextInput, Picker, StyleSheet} from "react-native";
 import {connect} from "react-redux"
+import { Colors, Spacing, Typography, Buttons} from '../../styles/index'
 
 class EditWorkout extends React.Component {
 
@@ -27,27 +28,108 @@ class EditWorkout extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
-        <Text style={{color:'black'}} >Workout Name:</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'black'}} onChangeText={(name) => this.setState({name})} value={this.state.name} />
-        <Text style={{color:'black'}} >Description:</Text>
-        <TextInput style={{height: 60, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'black'}} onChangeText={(description) => this.setState({description})} value={this.state.description} multiline={true} />
-        <Text style={{color:'black'}} >Warmup:</Text>
-        <TextInput style={{height: 60, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'black'}} onChangeText={(warmup) => this.setState({warmup})} value={this.state.warmup} multiline={true} />
-        <Text style={{color:'black'}} >Cool Down:</Text>
-        <TextInput style={{height: 20, borderColor:'gray', borderWidth: 1,width:this.props.environment.width*0.8,color:'black'}} onChangeText={(coolDown) => this.setState({coolDown})} value={this.state.coolDown} multiline={true} />
-        <Text style={{color:'black'}} >Workout Type:</Text>
+      <View style={styles.main}>
+        <Text style={styles.header} >Create a New Workout</Text>
+        <Text style={styles.inputText} >Workout Name:</Text>
+        <TextInput
+          style={styles.textInput}
+          textAlign='center'
+          placeholder = 'Workout Name...'
+          onChangeText={(name) => this.setState({name})}
+          value={this.state.name}
+        />
+        <Text style={styles.inputText} >Description:</Text>
+        <TextInput
+          style={styles.multiline}
+          textAlign='center'
+          placeholder = 'Enter Workout Description...'
+          onChangeText={(description) => this.setState({description})}
+          value={this.state.description}
+          multiline={true}
+        />
+        <Text style={styles.inputText} >Warmup:</Text>
+        <TextInput
+          style={styles.multiline}
+          textAlign='center'
+          placeholder = 'Enter Warmup...'
+          onChangeText={(warmup) => this.setState({warmup})}
+          value={this.state.warmup}
+          multiline={true}
+        />
+        <Text style={styles.inputText} >Cool Down:</Text>
+        <TextInput
+          style={styles.multiline}
+          textAlign='center'
+          placeholder = 'Enter Cool Down...'
+          onChangeText={(coolDown) => this.setState({coolDown})}
+          value={this.state.coolDown}
+          multiline={true}
+        />
+        <Text style={styles.inputText} >Workout Type:</Text>
         <View style={{flexDirection:'row'}}>
-          <Button flex={1} title='For Time' onPress={()=>this.setState({format:'For Time'})} color={this.state.format === 'For Time' ? '#841584' : 'black'} />
-          <Button flex={2} title='For Reps' onPress={()=>this.setState({format:'For Reps'})} color={this.state.format === 'For Reps' ? '#841584' : 'black'} />
-          <Button flex={3} title='For Load' onPress={()=>this.setState({format:'For Load'})} color={this.state.format === 'For Load' ? '#841584' : 'black'} />
+          <Button
+            flex={1}
+            title='For Time'
+            onPress={()=>this.setState({format:'For Time'})}
+            color={this.state.format === 'For Time' ? '#841584' : 'black'}
+          />
+          <Button
+            flex={2}
+            title='For Reps'
+            onPress={()=>this.setState({format:'For Reps'})}
+            color={this.state.format === 'For Reps' ? '#841584' : 'black'}
+          />
+          <Button
+            flex={3}
+            title='For Load'
+            onPress={()=>this.setState({format:'For Load'})}
+            color={this.state.format === 'For Load' ? '#841584' : 'black'}
+          />
         </View>
-        <Button title='Commit Changes' onPress={()=>this.props.editWorkout({_id:this.props.workout._id,...this.state})} />
-        <Button title='Go Back' onPress={() => this.props.navigation.navigate('My Workouts')} />
+        <Button
+          title='Commit Changes'
+          onPress={()=>this.props.editWorkout({_id:this.props.workout._id,...this.state})}
+        />
+        <Button
+          title='Go Back'
+          onPress={() => this.props.navigation.navigate('My Workouts')}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  main: {
+    ...Colors.background,
+    ...Spacing.centeredMain
+  },
+  header: {
+    ...Colors.text,
+    ...Spacing.mainHeader,
+    ...Typography.mainHeader
+  },
+  inputText: {
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
+  },
+  textInput: {
+    ...Colors.text,
+    ...Spacing.textInput
+  },
+  multiline: {
+    ...Colors.text,
+    ...Spacing.textInput,
+    height: Spacing.height*0.15
+  },
+  button: {
+    ...Buttons.button
+  },
+  inline: {
+    ...Spacing.sideBySide
+  }
+})
 
 const mstp = (state) => {
   return {
