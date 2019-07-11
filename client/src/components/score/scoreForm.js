@@ -31,7 +31,7 @@ class ScoreCard extends React.Component {
               style={styles.textInput} />
           </View>
           :
-          <View style={{flexDirection:'row'}}>
+          <View>
             <TextInput
               onChangeText={(results) => this.setState({results})}
               value={this.state.results}
@@ -39,18 +39,16 @@ class ScoreCard extends React.Component {
               placeholder = 'Enter Score...'
               style={styles.textInput} />
             {this.props.workout.format === "For Load" ?
-              <View style={styles.inline}>
+              <View style={{flexDirection: 'row', justifyContent:'center'}}>
                 <Button
-                  flex={1}
                   title='lbs'
                   onPress={()=>this.setState({weightUnits:'lbs'})}
-                  color={this.state.weightUnits === 'lbs' ? '#841584' : 'black'}
+                  color={this.state.weightUnits === 'lbs' ? Colors.tru : Colors.fal}
                 />
                 <Button
-                  flex={2}
                   title='kgs'
                   onPress={()=>this.setState({weightUnits:'kgs'})}
-                  color={this.state.weightUnits === 'kgs' ? '#841584' : 'black'}
+                  color={this.state.weightUnits === 'kgs' ? Colors.tru : Colors.fal}
                 />
               </View>
               : null}
@@ -59,16 +57,16 @@ class ScoreCard extends React.Component {
         <Button
           title='Rx'
           onPress={()=>this.setState({rx:!this.state.rx})}
-          color={this.state.rx ? '#841584' : 'black'}
+          color={this.state.rx ? Colors.tru : Colors.fal}
         />
         {!this.state.rx ?
-          <View>
-            <Text style={styles.inputText}>Modifications:</Text>
+          <View style={{alignItems:'center'}}>
+            <Text style={{...styles.inputText,justifyContent: 'center'}}>Modifications:</Text>
             <TextInput
               onChangeText={(modifications)=>this.setState({modifications})}
               textAlign = 'center'
               placeholder = 'Modifications...'
-              style={styles.multiline} 
+              style={styles.multiline}
               multiline={true}
             />
           </View>
@@ -119,7 +117,8 @@ const styles = StyleSheet.create({
     height: Spacing.height*0.15
   },
   att: {
-    ...Typography.accent
+    ...Typography.accent,
+    ...Colors.text
   },
   button: {
     ...Buttons.button

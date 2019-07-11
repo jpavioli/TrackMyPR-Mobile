@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, TextInput, TouchableHighlight, Modal, StyleSheet} from "react-native";
+import { View, Text, FlatList, TextInput, TouchableHighlight, Modal, ScrollView,StyleSheet} from "react-native";
 import { connect } from "react-redux"
 import WorkoutCard from '../../components/workout/workoutCard'
 import AddScore from '../../components/score/scoreForm'
@@ -69,7 +69,7 @@ class WorkoutContainer extends React.Component {
             placeholder = 'Search Workouts'
             onChangeText={this.searchFilterFunction} />
         </View>
-        <View>
+        <ScrollView>
           <FlatList
             data={this.state.data.length === 0 ? this.props.workouts : this.state.data}
             renderItem={ workout =>
@@ -79,7 +79,7 @@ class WorkoutContainer extends React.Component {
             }
             keyExtractor={w => w._id}
           />
-        </View>
+      </ScrollView>
       </View>
     );
   }

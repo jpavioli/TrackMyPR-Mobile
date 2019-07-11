@@ -69,7 +69,7 @@ class HomePage extends React.Component {
         </Modal>
         <View style={{height:50, allignItems:'stretch',...Colors.backgroundColor}} />
         <View style={{ flex: 1, alignItems: "stretch", color:'white', width:this.props.environment.width*0.95}}>
-          <Text style={styles.header} >Recently Logged Workouts</Text>
+          <Text style={styles.header} >Recently Logged Workouts:</Text>
           <View style={styles.card}>
             {this.props.scores.map((s)=>{ return <ScoreCard score={s} key={s._id} showScore={this.showScore}/> })}
           </View>

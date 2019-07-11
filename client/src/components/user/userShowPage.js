@@ -11,7 +11,7 @@ function Profile(props){
       <View style={styles.main}>
         <View style={{height:50, allignItems:'stretch',...Colors.backgroundColor}} />
         <Text style={styles.header} >{`${props.user.firstName} ${props.user.lastName}`}</Text>
-        <Text style={styles.text} >{`${props.user.city}, ${props.user.state}`}</Text>
+        <Text style={styles.text} >{`${props.user.location.city}, ${props.user.location.state}`}</Text>
         <Text style={styles.text} >Workouts Logged: {props.scores.length}</Text>
         <Text style={styles.text} >Workouts Created: {props.workouts.length}</Text>
         {props.workouts.length > 0 ?

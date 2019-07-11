@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     ...Cards.card
   },
   header: {
-    ...Colors.text,
+    ...Colors.cardText,
     ...Typography.mainHeader,
     ...Spacing.mainHeader,
   },

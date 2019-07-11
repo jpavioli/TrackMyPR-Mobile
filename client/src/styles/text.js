@@ -13,18 +13,18 @@ export const sectionHead = {
 
 export const body = {
   flexDirection: 'row',
-  fontSize: 12,
+  fontSize: 15,
 }
 
 export const accent = {
   flexDirection: 'row',
-  fontSize: 10,
+  fontSize: 15,
   fontStyle: 'italic',
 }
 
 export const button = {
   flexDirection: 'row',
-  allignItems: 'center',
+  alignItems: 'center',
   fontSize: 10,
   fontStyle: 'italic',
 }
