@@ -1,6 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet} from "react-native";
 import {Card, ListItem, Button, Icon } from 'react-native-elements'
+import { Colors, Spacing, Typography, Buttons, Cards} from '../../styles/index'
 
 export default function WorkoutCard(props) {
   return (
@@ -28,19 +29,26 @@ export default function WorkoutCard(props) {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da',
+    ...Cards.card
   },
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    ...Colors.cardText,
+    ...Typography.mainHeader,
+    ...Spacing.mainHeader,
+  },
+  section:{
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
   },
   description: {
-    fontSize: 15
+    ...Typography.text,
+    ...Spacing.input,
   },
   att: {
-    fontSize: 10,
-    fontStyle: 'italic'
+    ...Typography.accent
+  },
+  inline: {
+    ...Spacing.sideBySide,
   },
 });

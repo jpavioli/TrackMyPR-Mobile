@@ -1,9 +1,11 @@
 import React from "react";
-import { Modal, View, ScrollView, Text, Button, Alert} from "react-native";
+import { Modal, View, ScrollView, Text, Alert, StyleSheet} from "react-native";
+import {Button} from "react-native-elements"
 import { connect } from "react-redux"
 import Workout from '../../components/workout/workoutCard'
 import EditWorkout from '../../components/workout/editWorkoutForm'
 import {fetchMyWorkouts, editWorkout,deleteWorkout} from '../../actions/workoutActions'
+import { Colors, Spacing, Typography, Buttons, Cards} from '../../styles/index'
 
 class myWorkoutContainer extends React.Component {
 
@@ -39,8 +41,13 @@ class myWorkoutContainer extends React.Component {
   render() {
     return (
       <View style={{flexContainer: 'column', padding:this.props.environment.width*0.05}}>
-        <View>
-          <Button title='Crate a New Workout' onPress={() => this.props.navigation.navigate('New Workout')} />
+        <View style={{height:50, allignItems:'stretch',...Colors.backgroundColor}} />
+        <View style={{justifyContent:'center'}}>
+          <Button
+            style={{width:Spacing.width*0.8}}
+            title='Crate a New Workout'
+            onPress={() => this.props.navigation.navigate('New Workout')}
+          />
         </View>
         <ScrollView>
           <Modal
@@ -58,6 +65,29 @@ class myWorkoutContainer extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  main: {
+    ...Colors.background,
+    ...Spacing.main
+  },
+  header: {
+    ...Colors.text,
+    ...Spacing.mainHeader,
+    ...Typography.mainHeader
+  },
+  card: {
+    ...Spacing.card,
+    ...Colors.text,
+  },
+  textInput: {
+    ...Colors.text,
+    ...Spacing.textInput
+  },
+  button: {
+    ...Buttons.button
+  }
+})
 
 const mstp = (state) => {
   return {

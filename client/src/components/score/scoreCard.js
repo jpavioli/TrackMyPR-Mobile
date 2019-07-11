@@ -2,15 +2,21 @@ import React from "react";
 import {View, Text, StyleSheet, Dimensions, TouchableHighlight } from "react-native";
 import {Card, ListItem, Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
+import { Colors, Spacing, Typography, Buttons, Cards} from '../../styles/index'
 
 function ScoreCard(props) {
   let workout = props.workouts.find(w => w._id === props.score.workout)
   if (workout){
     return (
-      <TouchableHighlight onPress={()=>props.showScore(props.score,workout)} underlayColor='white'>
+      <TouchableHighlight
+        onPress={()=>props.showScore(props.score,workout)}
+        underlayColor='white'>
         <Card style={styles.card}>
           <Text style={styles.header}>{workout.name}</Text>
-          <Text style={styles.description}>Score: {props.score.results}</Text>
+          <View style={styles.inline}>
+            <Text style={styles.description}>Score: {props.score.results}</Text>
+            {props.score.rx ? <Text style ={styles.att} >Rx</Text> : null}
+          </View>
         </Card>
     </TouchableHighlight>
     )
@@ -20,20 +26,27 @@ function ScoreCard(props) {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#d6d7da'
+    ...Cards.card
   },
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    ...Colors.cardText,
+    ...Typography.mainHeader,
+    ...Spacing.mainHeader,
+  },
+  section:{
+    ...Spacing.input,
+    ...Colors.text,
+    ...Typography.sectionHead
   },
   description: {
-    fontSize: 15
+    ...Typography.text,
+    ...Spacing.input,
   },
   att: {
-    fontSize: 10,
-    fontStyle: 'italic'
+    ...Typography.accent
+  },
+  inline: {
+    ...Spacing.sideBySide,
   },
 });
 

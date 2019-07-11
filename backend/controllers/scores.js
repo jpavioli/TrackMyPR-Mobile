@@ -44,14 +44,11 @@ module.exports = {
   delete: async (req,res) => {
     const score = await Score.findById(req.params.id)
     if(!score) {return res.status(404).json({error: 'Score Does Not Exist',success: false})}
-    let id = score.id
-    const user = await User.findById(score.user.id)
-    const workout = await Workout.findById(score.workout.id)
+    let id = score._id
+    const workout = await Workout.findById(score.workout._id)
+    await workout.scores.pull(score)
+    await workout.save()
     await score.remove()
-    user.scores.pull(score)
-    await user.save()
-    workouts.scores.pull(score)
-    await workouts.save()
     res.status(200).json({id,success:true})
   },
 

@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
     ...Cards.card
   },
   header: {
-    ...Colors.cardText,
+    ...Colors.text,
     ...Typography.mainHeader,
     ...Spacing.mainHeader,
   },
   section:{
     ...Spacing.input,
-    ...Colors.cardText,
+    ...Colors.text,
     ...Typography.sectionHead
   },
   description: {
